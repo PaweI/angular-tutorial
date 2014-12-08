@@ -42,7 +42,7 @@ describe('phonecatApp', function() {
         return phoneNameColumn.map(function(elm) {
           return elm.getText();
         });
-      }
+      };
 
       query.sendKeys('tablet');
 
@@ -57,6 +57,15 @@ describe('phonecatApp', function() {
         "Motorola XOOM\u2122",
         "Motorola XOOM\u2122 with Wi-Fi"
         ]);
+    });
+
+    it('should render phone specific links', function() {
+      var query = element(by.model('query'));
+      query.sendKeys('nexus');
+      element.all(by.css('.phones li a')).first().click();
+      browser.getLocationAbsUrl().then(function(url) {
+        expect(url.split('#')[1]).toBe('/phones/nexus-s');
+      });
     });
   });
 });
